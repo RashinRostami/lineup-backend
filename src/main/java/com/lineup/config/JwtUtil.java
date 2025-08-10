@@ -8,14 +8,17 @@ import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.Set;
 
 @Component
 public class JwtUtil {
     Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
-    public String generateToken(String username) {
+    public String generateToken(String username, String role, Set<String> permission) {
         return Jwts.builder()
                 .setSubject(username)
+                .claim("role", role)
+                .claim("permission", permission)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
                 .signWith(key)
