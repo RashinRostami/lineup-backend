@@ -30,6 +30,7 @@ public class UserController {
         }
     }
 
+
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody UserEntity user) {
         user.setRole(UserEntity.Role.ROLE_USER);
