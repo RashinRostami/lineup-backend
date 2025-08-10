@@ -32,6 +32,7 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody UserEntity user) {
+        user.setRole(UserEntity.Role.ROLE_USER);
         UserEntity savedUser = userService.registerUser(user);
         return ResponseEntity.ok(savedUser);
     }
